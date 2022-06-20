@@ -1,0 +1,23 @@
+import numpy as np
+import cv2
+import os
+from matplotlib import pyplot as plt
+from math import sqrt
+
+#lectura de la imagen
+img1=cv2.imread('casa.png')
+img2=cv2.cvtColor(img1,cv2.COLOR_BGR2GRAY)
+
+#esquinas
+esquinas=cv2.goodFeaturesToTrack(img2,150,0.01,5)
+esquinas=np.int0(esquinas)
+#identificador grafico
+for i in esquinas:
+    x,y=i.ravel()
+    cv2.circle(img2,(x,y),2,255,-5)
+#muestra de imagenes
+plt.imshow(img2),plt.show()
+cv2.imshow('Muestra',img2)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
